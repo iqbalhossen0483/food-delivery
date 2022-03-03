@@ -22,7 +22,7 @@ const Shop: () => JSX.Element = () => {
     )
 
     return (
-        <div className='py-20 px-10'>
+        <div className='lg:py-20 px-10'>
             <Product products={products} />
         </div>
     );
