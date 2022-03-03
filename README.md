@@ -8,6 +8,8 @@
 * User can order their favorite products
 * admin can mange aevrything
 * mobile and desktop friendly
+* users have two role.. user, admin
+* To see admin features, email: rakib@gmail.com pass: Rakib420
 
 
 # Getting Started with Create React App
