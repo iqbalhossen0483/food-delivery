@@ -9,7 +9,7 @@ const MyOrder: () => JSX.Element = () => {
     const idToken: string = localStorage.getItem("idToken") || "";
     
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${auth?.user?.email}`, {
+        fetch(`https://fooddelivery-server.herokuapp.com/orders/${auth?.user?.email}`, {
             headers: {
                 "authorize": idToken
             }

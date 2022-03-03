@@ -12,7 +12,7 @@ const SeeProduct:React.FC<Props> = ({id, setShow}) => {
 
     useEffect(() => {
         if (id) {
-            fetch(`http://localhost:5000/products/${id}`)
+            fetch(`https://fooddelivery-server.herokuapp.com/products/${id}`)
                 .then(res => res.json())
                 .then(data => setProduct(data))
         }

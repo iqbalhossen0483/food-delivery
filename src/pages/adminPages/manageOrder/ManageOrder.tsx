@@ -14,7 +14,7 @@ const ManageOrder = () => {
     const email: string = auth?.user?.email || "";
 
     useEffect(() => {
-        fetch("http://localhost:5000/orders", {
+        fetch("https://fooddelivery-server.herokuapp.com/orders", {
             headers: {
                 "authorize": idToken,
                 "email":email

@@ -17,7 +17,7 @@ const Product: React.FC<Props> = ({ products }) => {
             if (exist) return alert("Product already added");
         }
         if (auth?.user) {
-            fetch(`http://localhost:5000/users/${auth.user.email}`, {
+            fetch(`https://fooddelivery-server.herokuapp.com/users/${auth.user.email}`, {
                 method: "PUT",
                 headers: {
                     "content-type": "application/json"
@@ -43,7 +43,7 @@ const Product: React.FC<Props> = ({ products }) => {
                     return (
                         <div key={item.name} className="product">
                             <img
-                                className='rounded-t-2xl'
+                                className='rounded-t-2xl w-full'
                                 src={item.imgUrl}
                                 alt=""
                             />

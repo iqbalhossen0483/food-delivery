@@ -16,7 +16,7 @@ const CartProduct: FC<Props> = ({ setShowCart }) => {
     useEffect(() => {
         setLoading(true);
         if (cart) {
-            fetch(`http://localhost:5000/products/cart`, {
+            fetch(`https://fooddelivery-server.herokuapp.com/products/cart`, {
                 headers: {
                     carts: cart
                 }
@@ -30,27 +30,32 @@ const CartProduct: FC<Props> = ({ setShowCart }) => {
         };
     }, [cart]);
 
-  return (
-      <div
-          onMouseLeave={() => setShowCart(false)}
-          className='cart-prduct'>
-          {products && !loading ?
-              products.map(item => {
-                  return (
-                      <div className='grid grid-cols-2 w-52 gap-3 border-b mb-3'>
-                          <img src={item.imgUrl} alt="" />
-                          <p>{item.name}</p>
-                      </div>
-                  )
-              })
-              :
-              <p>Loading...</p>
-          }
-          <div className='flex justify-center'>
-              <button className='px-3 py-1 text-sm'>view cart</button>
-          </div>
-      </div>
-  )
+    return (
+        <div
+            onMouseLeave={() => setShowCart(false)}
+            className='cart-prduct'>
+            {products && !loading ?
+                products.map(item => {
+                    return (
+                        <div className='grid grid-cols-2 w-52 gap-3 border-b mb-3'>
+                            <img src={item.imgUrl} alt="" />
+                            <p>{item.name}</p>
+                        </div>
+                    )
+                })
+                :
+                auth?.userFromDb?.cart.length ?
+                    <p>Loading...</p>
+                    :
+                    <p>No Product</p>
+            }
+            {products &&
+                <div className='flex justify-center'>
+                    <button className='px-3 py-1 text-sm'>view cart</button>
+                </div>
+            }
+        </div>
+    );
 }
 
 export default CartProduct

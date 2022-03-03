@@ -21,7 +21,7 @@ const AdminRoute:React.FC<Props> = ({element}) => {
     useEffect(() => {
         setLoading(true);
         if (auth?.user) {
-            fetch(`http://localhost:5000/users/${email}`, {
+            fetch(`https://fooddelivery-server.herokuapp.com/users/${email}`, {
                 headers: {
                     "authorize": idToken,
                     "email": email

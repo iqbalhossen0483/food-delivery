@@ -6,7 +6,7 @@ const ProductPart: () => JSX.Element = () => {
   const [products, setProducts] = useState<ProductSchema[] | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch("https://fooddelivery-server.herokuapp.com/products")
       .then(res => res.json())
       .then(data=> setProducts(data))
   },[])

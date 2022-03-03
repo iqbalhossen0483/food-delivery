@@ -10,7 +10,7 @@ const HowToOrderPart: () => JSX.Element = () => {
     const [orderProcess, setOrderProcess] = useState<OrderProcess[] | null>(null);
 
     useEffect(() => {
-        fetch("http://localhost:5000/orderProcess")
+        fetch("https://fooddelivery-server.herokuapp.com/orderProcess")
             .then(res => res.json())
             .then(data => setOrderProcess(data))
     }, []);

@@ -51,7 +51,7 @@ const LoginRegister = () => {
     }
     return (
         <form
-            className='login-conainer w-2/5'
+            className='login-conainer mx-5 lg:w-2/5 lg:mx-auto'
             onSubmit={handleSubmit(onSubmit)}>
             <h2>{ logIn ? "Login" : "Register" }</h2>
 

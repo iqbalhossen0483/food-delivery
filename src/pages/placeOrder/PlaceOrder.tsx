@@ -26,7 +26,7 @@ const PlaceOrder: () => JSX.Element = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products/${id}`)
+    fetch(`https://fooddelivery-server.herokuapp.com/products/${id}`)
       .then(res => res.json())
       .then(data=>setProduct(data))
    }, []);
@@ -36,7 +36,7 @@ const PlaceOrder: () => JSX.Element = () => {
     data.name = name;
     data.email = email;
     data.productId = product?._id;
-    fetch("http://localhost:5000/orders", {
+    fetch("https://fooddelivery-server.herokuapp.com/orders", {
       method: "POST",
       headers: {
         'content-type': "application/json"

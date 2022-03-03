@@ -25,7 +25,7 @@ const AddProduct: () => JSX.Element = () => {
         formData.append("price", data.price);
         formData.append('img', data.img[0]);
         
-        fetch("http://localhost:5000/products", {
+        fetch("https://fooddelivery-server.herokuapp.com/products", {
             method: "POST",
             body: formData
         })

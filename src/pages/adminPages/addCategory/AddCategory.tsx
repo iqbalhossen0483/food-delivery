@@ -20,7 +20,7 @@ const AddCategory: () => JSX.Element = () => {
         formData.append("tag", data.tag);
         formData.append("img", data.img[0]);
         
-        fetch("http://localhost:5000/products/category", {
+        fetch("https://fooddelivery-server.herokuapp.com/products/category", {
             method: "POST",
             body: formData
         })

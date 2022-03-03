@@ -1,6 +1,10 @@
-.header.menus a::after{
+
+@media (min-width: 768px) {
+    .header.menus a::after{
     content: "|";
     margin-left: 10px;
+};
+
 }
 .menus a{
     width: fit-content;

@@ -36,10 +36,10 @@
     @apply text-xl ml-3
   }
   .product-container{
-    @apply grid grid-cols-4 gap-5
+    @apply lg:grid grid-cols-4 gap-5
   }
   .product{
-    @apply bg-white rounded-2xl pb-7
+    @apply bg-white rounded-2xl pb-7 my-5 md:my-0
   }
   .product .tag{
     @apply w-fit text-gray bg-lightgray py-1 px-2 mx-auto rounded text-xs font-semibold max-h-fit
@@ -66,13 +66,13 @@
 
   /* header component */
   .header-container{
-    @apply flex justify-between px-20 z-50 bg-white py-2 items-center w-full relative
+    @apply flex justify-between pl-5 pr-16 md:px-20 z-50 bg-white py-2 items-center w-full relative
   }
   .menus{
-    @apply flex
+    @apply flex flex-col lg:flex-row
   }
   .menus a{
-    @apply pr-3 font-semibold text-slate-500 hover:text-black
+    @apply md:pr-3 font-semibold text-slate-500 hover:text-black
   }
   .menus .cart{
     @apply text-lg relative
@@ -82,6 +82,9 @@
   }
   .stikemod{
     @apply fixed top-0 left-0 shadow-md
+  }
+  .mobile-view{
+    @apply absolute top-full left-0 z-50 bg-white w-2/5
   }
 
   /* cart-prduct */
@@ -96,13 +99,13 @@
     @apply w-full text-white flex flex-col justify-center items-center font-medium bg-gray py-14 h-full
   }
   .banner-container .heading{
-    @apply text-7xl px-4 py-2 rounded shadow-sm
+    @apply text-3xl lg:text-7xl px-4 py-2 rounded shadow-sm
   }
   .banner-container .tag{
-    @apply text-3xl px-4 py-2 rounded shadow-sm mt-3
+    @apply text-xl lg:text-3xl px-4 py-2 rounded shadow-sm mt-3
   }
   .banner-container .lower-caption{
-    @apply grid grid-cols-4 w-full text-center mt-20 text-xl uppercase
+    @apply grid grid-cols-2 lg:grid-cols-4 w-full text-center mt-20 md:text-xl uppercase gap-5 lg:gap-0
   }
   .banner-container .lower-caption p{
     @apply hover:text-primary w-fit px-4 rounded
@@ -116,13 +119,13 @@
     @apply py-10 text-center mt-16
   }
   .category-section .header{
-    @apply text-5xl
+    @apply text-4xl md:text-5xl
   }
   .category-section .category{
-    @apply grid grid-cols-4 gap-5 px-28 mt-10
+    @apply lg:grid grid-cols-4 gap-5 px-10 lg:px-28 mt-10
   }
   .category-section .category .item{
-    @apply bg-white pb-10 rounded-2xl
+    @apply bg-white pb-10 rounded-2xl my-5 lg:my-0
   }
   .category-section .category .item h2{
     @apply text-xl uppercase font-semibold my-3
@@ -133,10 +136,10 @@
     @apply bg-white pt-20 text-center
   }
   .how-to-order-wrapper h2{
-    @apply text-5xl
+    @apply text-4xl md:text-5xl
   }
   .how-to-order-wrapper .step{
-    @apply grid grid-cols-4 gap-5 px-28
+    @apply grid grid-cols-2 lg:grid-cols-4 gap-5 px-2 lg:px-28
   }
   .how-to-order-wrapper .step .count{
     @apply text-xl font-semibold bg-primary h-10 w-10 rounded-full mx-auto flex justify-center items-center my-5 text-white
@@ -144,10 +147,10 @@
 
   /* home-product section */
   .home-product-wrapper{
-    @apply text-center py-20 px-14
+    @apply text-center py-10 lg:py-20 px-7 lg:px-14
   }
   .home-product-wrapper h2{
-    @apply text-5xl
+    @apply text-4xl md:text-5xl
   }
 
 
@@ -214,7 +217,7 @@
 
   /* footer */
   .footer{
-    @apply flex justify-center bg-white items-center py-10 text-xl font-semibold text-gray
+    @apply flex justify-center bg-white items-center py-10 md:text-xl font-semibold text-gray
   }
 }
 
@@ -237,5 +240,8 @@
   }
   .deshboard-container, .my-account-container, .spinner{
     min-height: 62vh;
+  }
+  .mobile-view{
+    min-height: 87vh
   }
 }

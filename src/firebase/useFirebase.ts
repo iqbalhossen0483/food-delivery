@@ -115,7 +115,7 @@ const useFirebase: () => Hook = () => {
             data = { email, displayName, role: "user", type };
         }
 
-        fetch(`http://localhost:5000/users/${user.email}`, {
+        fetch(`https://fooddelivery-server.herokuapp.com/users/${user.email}`, {
             method: 'POST',
             headers: {
                 "content-type": "application/json"
@@ -147,7 +147,7 @@ const useFirebase: () => Hook = () => {
     function getUserFromDb(id: string) {
         const idToken: string = localStorage.getItem("idToken") || "";
         const email: string = id || "";
-        fetch(`http://localhost:5000/users/${email}`,{
+        fetch(`https://fooddelivery-server.herokuapp.com/users/${email}`,{
                 headers: {
                     "authorize": idToken,
                     "email": email
