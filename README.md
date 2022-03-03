@@ -1,3 +1,15 @@
+## Website Details
+
+# Food Delivery Website
+
+* Live site link: https://delivery-53abd.web.app/
+# key features
+
+* User can order their favorite products
+* admin can mange aevrything
+* mobile and desktop friendly
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
