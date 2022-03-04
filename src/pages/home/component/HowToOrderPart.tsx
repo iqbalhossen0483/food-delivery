@@ -1,18 +1,25 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { HomeLoading } from "../Home";
 
 interface OrderProcess{
     img: string,
     step: string,
     smg: string
 }
+interface Props {
+    setLoading: React.Dispatch<React.SetStateAction<HomeLoading>>,
+    loding: HomeLoading
+}
 
-const HowToOrderPart: () => JSX.Element = () => {
+const HowToOrderPart: FC<Props> = ({setLoading, loding}) => {
     const [orderProcess, setOrderProcess] = useState<OrderProcess[] | null>(null);
 
     useEffect(() => {
         fetch("https://fooddelivery-server.herokuapp.com/orderProcess")
             .then(res => res.json())
-            .then(data => setOrderProcess(data))
+            .then(data => {
+                setOrderProcess(data);
+            })
     }, []);
 
     return (

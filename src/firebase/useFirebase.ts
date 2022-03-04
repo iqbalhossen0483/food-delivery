@@ -15,18 +15,20 @@ import {
 
 firebaseInit();
 
+interface Result {
+    user: User
+}
 
 export interface Hook {
-    loginWithGoogle: () => void,
-    singUpWithEmail: (email: string, password: string, name: string) => void,
-    loginWithEmail: (email:string, password:string) => void,
+    loginWithGoogle: () => Promise<Result>,
+    singUpWithEmail: (email: string, password: string, name: string) => Promise<Result>,
+    loginWithEmail: (email:string, password:string) => Promise<Result>,
     logOUt: () => void,
     user: User | null,
     loading: boolean,
-    login: boolean,
     userFromDb: UserFromDb | null,
-    update: boolean,
-    setUpdate: (action: boolean) => void;
+    addUserName: (name: string) => void,
+    getUserFromDb: (email: string | null) => void,
 }
 
 interface UserFromDb{
@@ -37,82 +39,78 @@ interface UserFromDb{
 const useFirebase: () => Hook = () => {
     const [userFromDb, setUserFromDb] = useState<UserFromDb | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
-    const [update, setUpdate] = useState<boolean>(false);
     const [user, setUser] = useState<User | null>(null);
-    const [login, setLogin] = useState<boolean>(false);
     const googleProvider = new GoogleAuthProvider();
     const auth = getAuth();
 
     //log in with google
     function loginWithGoogle() {
-        setLogin(true);
-        signInWithPopup(auth, googleProvider)
-            .then(result => {
-                makeUser(result.user, "google");
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        return signInWithPopup(auth, googleProvider);
     };
 
     //sing up with email
     function singUpWithEmail(email: string, password: string, name: string) {
-        setLogin(true);
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(result => {
-                addUserName(name, result.user);
-            })
-            .catch(err => {
-                console.log(err);
-                setLogin(false);
-            })
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password);
     };
 
     //addUser name
-    function addUserName(name: string, user:User) {
+    function addUserName(name: string) {
         if (auth.currentUser) {
             updateProfile(auth.currentUser, {
                 displayName: name
             })
                 .then(() => {
-                    makeUser(user, "email");
                 })
                 .catch(err => {
                     console.log(err);
-                    setLogin(false);
                 })
         };
     };
 
     //sing in with email
     function loginWithEmail(email: string, password: string) {
-        setLogin(true);
-        signInWithEmailAndPassword(auth, email, password)
-            .then(result => {
-                setLogin(false);
-            })
-            .catch(err => {
-                console.log(err);
-                setLogin(false);
-            })
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
     // sing out
     function logOUt() {
         signOut(auth)
-            .then(() => setUser(null))
+            .then(() => {
+                setUser(null);
+                setUserFromDb(null);
+            })
             .catch(err=>console.log(err))
     }
 
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
+                getIdToken(user)
+                    .then(idToken => {
+                        localStorage.setItem("idToken", `Bearer ${idToken}`);
+                        makeUser(user);
+                    })
+            }
+            else setUser(null);
+            setLoading(false);
+        })
+    }, []);
+
     //make user to database
-    function makeUser(user: User, type:string) {
+    function makeUser(user: User) {
+        if (!user.email) return;
+
         const { email, displayName, photoURL } = user;
         let data = {};
         if (photoURL) {
-            data = { email, displayName, photoURL, role: "user", type };
+            data = { email, displayName, photoURL, role: "user" };
         }
         else {
-            data = { email, displayName, role: "user", type };
+            data = { email, displayName, role: "user" };
         }
 
         fetch(`https://fooddelivery-server.herokuapp.com/users/${user.email}`, {
@@ -124,29 +122,15 @@ const useFirebase: () => Hook = () => {
         })
             .then(res => res.json())
             .then(data => {
-                setLogin(false);
+                getUserFromDb(user.email);
             })
-            .catch(err=> setLogin(false))
+            .catch(err => { })
     };
 
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user);
-                getIdToken(user)
-                    .then(idToken => {
-                        localStorage.setItem("idToken", `Bearer ${idToken}`);
-                    })
-            }
-            else setUser(null);
-            setLoading(false);
-        })
-    }, []);
-
     //getUser from db
-    function getUserFromDb(id: string) {
+    function getUserFromDb(Email: string | null) {
         const idToken: string = localStorage.getItem("idToken") || "";
-        const email: string = id || "";
+        const email: string = Email || "";
         fetch(`https://fooddelivery-server.herokuapp.com/users/${email}`,{
                 headers: {
                     "authorize": idToken,
@@ -155,16 +139,12 @@ const useFirebase: () => Hook = () => {
             })
             .then(res => res.json())
             .then(data => {
-                setUserFromDb(data)
+                if (data) {
+                    setUserFromDb(data);
+                }
             })
             .catch(err=>console.log(err))
     }
-
-    useEffect(() => {
-        if (user?.email) {
-            getUserFromDb(user.email);
-        }
-    }, [update, user]);
     
     
     return {
@@ -174,10 +154,9 @@ const useFirebase: () => Hook = () => {
         user,
         loading,
         logOUt,
-        login,
         userFromDb,
-        update,
-        setUpdate
+        addUserName,
+        getUserFromDb
     }
 };
 

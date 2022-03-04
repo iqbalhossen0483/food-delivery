@@ -1,3 +1,4 @@
+import { User } from 'firebase/auth';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -27,21 +28,40 @@ const LoginRegister = () => {
 
     function onSubmit(data: UserInfo): void {
         if (logIn) {
-            auth?.loginWithEmail(data.email, data.password);
+            auth?.loginWithEmail(data.email, data.password)
+                .then(result => {
+                    if (result.user) {
+                        navigate(from);
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
         }
         else {
-            auth?.singUpWithEmail(data.email, data.password, data.name);
+            auth?.singUpWithEmail(data.email, data.password, data.name)
+                .then((result) => {
+                    if (result.user) {
+                        auth.addUserName(data.name);
+                        navigate(from);
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
-        setTimeout(() => {
-            if (!auth?.login) navigate("/", { replace: true });
-        }, 3000);
     }
 
     function googleLogin() {
-        auth?.loginWithGoogle();
-        setTimeout(() => {
-            if (!auth?.login) navigate("/", { replace: true });
-        }, 4000);
+        auth?.loginWithGoogle()
+            .then(result => {
+                if (result.user) {
+                    navigate(from);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
 
@@ -49,6 +69,8 @@ const LoginRegister = () => {
         if (logIn) return setLogIn(false);
         else setLogIn(true);
     }
+
+    console.log(auth?.loading);
     return (
         <form
             className='login-conainer mx-5 lg:w-2/5 lg:mx-auto'
@@ -99,7 +121,8 @@ const LoginRegister = () => {
             <button
                 className='w-32 py-1 mx-auto col-span-3 mt-3 bg-primary'
                 type='submit'
-                disabled={auth?.login}>
+                disabled={auth?.loading}
+            >
                 Submit
             </button>
         </form>

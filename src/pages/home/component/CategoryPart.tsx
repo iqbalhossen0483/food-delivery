@@ -1,13 +1,21 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { categorySchema } from "../../adminPages/addCategory/AddCategory";
+import { HomeLoading } from "../Home";
 
+interface Props{
+    setLoading: React.Dispatch<React.SetStateAction<HomeLoading>>,
+    loding: HomeLoading
+}
 
-const CategoryPart = () => {
+const CategoryPart: FC<Props> = ({setLoading, loding}) => {
     const [categories, setCategories] = useState<categorySchema[] | null>(null);
+
     useEffect(() => {
         fetch("https://fooddelivery-server.herokuapp.com/products/category")
             .then(res => res.json())
-            .then(data => setCategories(data))
+            .then(data => {
+                setCategories(data);
+            })
     }, []);
 
     return (

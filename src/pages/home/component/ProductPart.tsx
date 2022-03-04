@@ -1,14 +1,22 @@
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import Product from '../../../sharedComponent/Product'
 import { ProductSchema } from '../../adminPages/addProduct/AddProduct';
+import { HomeLoading } from '../Home';
 
-const ProductPart: () => JSX.Element = () => {
+interface Props{
+  setLoading: React.Dispatch<React.SetStateAction<HomeLoading>>,
+  loding: HomeLoading
+}
+
+const ProductPart: FC<Props> = ({setLoading, loding}) => {
   const [products, setProducts] = useState<ProductSchema[] | null>(null);
 
   useEffect(() => {
     fetch("https://fooddelivery-server.herokuapp.com/products")
       .then(res => res.json())
-      .then(data=> setProducts(data))
+      .then(data => {
+        setProducts(data);
+      });
   },[])
 
   return (

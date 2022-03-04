@@ -13,8 +13,11 @@ const Product: React.FC<Props> = ({ products }) => {
 
     function cartProduct(id: string) {
         if (auth?.userFromDb?.cart) {
-            const exist = auth.userFromDb.cart.map(item => item === id);
-            if (exist) return alert("Product already added");
+            const exist = auth.userFromDb.cart.find(item => item === id);
+            if (exist) {
+                console.log(exist);
+                return alert("Product already added");
+            }
         }
         if (auth?.user) {
             fetch(`https://fooddelivery-server.herokuapp.com/users/${auth.user.email}`, {
@@ -28,8 +31,9 @@ const Product: React.FC<Props> = ({ products }) => {
                 .then(data => {
                     if (data.modifiedCount > 0) {
                         alert("Product added");
-                        if (auth.update) auth.setUpdate(false);
-                        else auth.setUpdate(true);
+                        if (auth.user?.email) {
+                            auth.getUserFromDb(auth.user?.email);
+                        }
                     }
                 });
         }
