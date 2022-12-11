@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useAuth from '../../../hooks/useAuth';
 
@@ -8,13 +8,16 @@ interface Props{
 
 const Menus: FC<Props> = ({setShowCart}) => {
     const auth = useAuth();
+
+    useEffect(() => {
+        fetch(``)
+    },[])
     
     return (
         <div className='header menus items-start pl-5 md:pl-0 md:items-center'>
-            <Link to="/shop">SHOP</Link>
+            <Link to="/shop">MENUS</Link>
             <Link to="/">FEATURES</Link>
             <Link to="/">BLOG</Link>
-            <Link to="/">MENUS</Link>
             <Link to="/">CONTACTS</Link>
             {auth?.user?.email && auth.userFromDb?.role === "admin" &&
                 <Link to="/deshboard">DESHBOARD</Link>

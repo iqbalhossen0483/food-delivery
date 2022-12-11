@@ -4,15 +4,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { ProductSchema } from "../adminPages/addProduct/AddProduct";
 
-export interface OrderSchema{
-  _id: string,
-  name: string,
-  email: string,
-  productId: string | undefined,
-  phone: number,
-  distict: string,
-  policeStation: string,
-  road: string
+export interface OrderSchema {
+  _id: string;
+  name: string;
+  email: string;
+  productId: string | undefined;
+  phone: number;
+  distict: string;
+  policeStation: string;
+  road: string;
 }
 
 const PlaceOrder: () => JSX.Element = () => {
@@ -26,92 +26,89 @@ const PlaceOrder: () => JSX.Element = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`https://fooddelivery-server.herokuapp.com/products/${id}`)
-      .then(res => res.json())
-      .then(data=>setProduct(data))
-   }, []);
-  
+    if (id) {
+      fetch(
+        `https://myserver-production-ddf8.up.railway.app/food/products/${id}`
+      )
+        .then((res) => res.json())
+        .then((data) => setProduct(data));
+    }
+  }, [id]);
+
   function onSubmit(data: OrderSchema): void {
     setLoading(true);
     data.name = name;
     data.email = email;
     data.productId = product?._id;
-    fetch("https://fooddelivery-server.herokuapp.com/orders", {
+    fetch("https://myserver-production-ddf8.up.railway.app/food/orders", {
       method: "POST",
       headers: {
-        'content-type': "application/json"
+        "content-type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.insertedId) {
           alert("Order placed successfully");
           reset();
           navigate("/");
         }
         setLoading(false);
-      })
-  };
+      });
+  }
 
   return (
-    <form
-      className='place-order w-2/5'
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className='place-order w-2/5' onSubmit={handleSubmit(onSubmit)}>
       <h2>Place Order</h2>
 
-      <label htmlFor="name">User Name:</label>
-      <input
-        {...register("name")}
-        disabled
-        defaultValue={name}
-        type="text"
-      />
+      <label htmlFor='name'>User Name:</label>
+      <input {...register("name")} disabled defaultValue={name} type='text' />
 
-      <label htmlFor="email">Email:</label>
+      <label htmlFor='email'>Email:</label>
       <input
         {...register("email")}
         disabled
         defaultValue={email}
-        type="email"
+        type='email'
       />
 
-      <label htmlFor="phone">Phone:</label>
+      <label htmlFor='phone'>Phone:</label>
       <input
         {...register("phone", { required: true })}
-        type="number"
-        placeholder="Enter Phone number"
+        type='number'
+        placeholder='Enter Phone number'
       />
-      <label htmlFor="distict">Distict:</label>
+      <label htmlFor='distict'>Distict:</label>
       <input
         {...register("distict", { required: true })}
-        type="text"
-        placeholder="Enter Distict"
+        type='text'
+        placeholder='Enter Distict'
       />
 
-      <label htmlFor="policeStation">Police Station:</label>
+      <label htmlFor='policeStation'>Police Station:</label>
       <input
         {...register("policeStation", { required: true })}
-        type="text"
-        placeholder="Enter Police Station"
+        type='text'
+        placeholder='Enter Police Station'
       />
 
-      <label htmlFor="road">Road/Moholla:</label>
+      <label htmlFor='road'>Road/Moholla:</label>
       <input
         {...register("road", { required: true })}
-        type="text"
-        placeholder="Enter Road no./Moholla"
+        type='text'
+        placeholder='Enter Road no./Moholla'
       />
-            
+
       <button
         className='w-32 py-1 mx-auto col-span-3 mt-7 bg-primary hover:text-primary'
         disabled={loading}
-        type='submit'>
+        type='submit'
+      >
         Submit
       </button>
     </form>
   );
-}
+};
 
-export default PlaceOrder
+export default PlaceOrder;
