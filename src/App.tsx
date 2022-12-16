@@ -31,30 +31,15 @@ function App() {
           path='/myaccount'
           element={<PrivateRoute element={<MyAccount />} />}
         >
-          <Route
-            path='myorder'
-            element={<PrivateRoute element={<MyOrder />} />}
-          />
+          <Route path='myorder' element={<MyOrder />} />
         </Route>
 
         {/* admin page */}
         <Route path='/admin' element={<AdminRoute element={<Deshboard />} />}>
-          <Route
-            path='add-category'
-            element={<AdminRoute element={<AddCategory />} />}
-          />
-          <Route
-            path='add-product'
-            element={<AdminRoute element={<AddProduct />} />}
-          />
-          <Route
-            path='manage-product'
-            element={<AdminRoute element={<ManageProduct />} />}
-          />
-          <Route
-            path='manage-order'
-            element={<AdminRoute element={<ManageOrder />} />}
-          />
+          <Route path='add-category' element={<AddCategory />} />
+          <Route path='add-product' element={<AddProduct />} />
+          <Route path='manage-product' element={<ManageProduct />} />
+          <Route path='manage-order' element={<ManageOrder />} />
         </Route>
 
         <Route path='*' element={<NotFound />} />

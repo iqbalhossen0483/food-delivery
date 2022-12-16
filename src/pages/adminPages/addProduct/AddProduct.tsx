@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export interface ProductSchema {
-  _id: string;
+interface ProductSchema {
   name: string;
   img: ArrayLike<FileList[0]>;
-  imgUrl: string;
-  imgId: string;
   tag: string;
   recipes: string;
   price: string;
@@ -29,15 +26,15 @@ const AddProduct: () => JSX.Element = () => {
       method: "POST",
       body: formData,
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
+      .then(async (res) => {
+        const data = await res.json();
+        if (res.ok && data.insertedId) {
           alert("product upload successfull");
           reset();
-          setLoading(false);
-        }
+        } else Error(data.message);
       })
-      .catch((err) => setLoading(false));
+      .catch((err) => alert(err.message))
+      .finally(() => setLoading(false));
   }
 
   return (

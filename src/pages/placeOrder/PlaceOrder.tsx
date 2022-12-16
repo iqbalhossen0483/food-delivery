@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { ProductSchema } from "../adminPages/addProduct/AddProduct";
+import { ProductSchema } from "../../sharedComponent/Product";
 
 export interface OrderSchema {
   _id: string;

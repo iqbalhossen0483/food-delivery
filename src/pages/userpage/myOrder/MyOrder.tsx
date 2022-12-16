@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
-import { ProductSchema } from "../../adminPages/addProduct/AddProduct";
+import { ProductSchema } from "../../../sharedComponent/Product";
 
 interface Order {
   _id: string;

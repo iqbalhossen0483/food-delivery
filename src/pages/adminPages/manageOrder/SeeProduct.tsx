@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ProductSchema } from "../addProduct/AddProduct";
+import { ProductSchema } from "../../../sharedComponent/Product";
 
 interface Props {
   id: string | undefined;

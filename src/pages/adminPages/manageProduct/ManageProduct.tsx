@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ProductSchema } from "../addProduct/AddProduct";
+import { ProductSchema } from "../../../sharedComponent/Product";
 
 const ManageProduct: () => JSX.Element = () => {
   const [prosucts, setProducts] = useState<ProductSchema[] | null>(null);

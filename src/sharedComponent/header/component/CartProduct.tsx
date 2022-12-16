@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
-import { ProductSchema } from "../../../pages/adminPages/addProduct/AddProduct";
+import { ProductSchema } from "../../Product";
 
 interface Props {
   setShowCart: (active: boolean) => void;

@@ -1,8 +1,16 @@
-import { ProductSchema } from "../pages/adminPages/addProduct/AddProduct";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import React from "react";
 
+export interface ProductSchema {
+  _id: string;
+  name: string;
+  imgUrl: string;
+  imgId: string;
+  tag: string[];
+  recipes: string;
+  price: string;
+}
 interface Props {
   products: ProductSchema[] | null;
 }
@@ -41,9 +49,19 @@ const Product: React.FC<Props> = ({ products }) => {
         products.map((item: ProductSchema) => {
           return (
             <div key={item.name} className='product'>
-              <img className='rounded-t-2xl w-full' src={item.imgUrl} alt='' />
+              <img
+                className='rounded-t-2xl w-full object-fill'
+                src={item.imgUrl}
+                alt=''
+              />
               <div className='px-3 pt-2'>
-                <p className='tag'>{item.tag}</p>
+                <p className='space-x-1'>
+                  {item.tag.map((t, i) => (
+                    <span className='tag' key={i}>
+                      {t}
+                    </span>
+                  ))}
+                </p>
                 <p className='name'>{item.name}</p>
                 <p className='price'>{item.price}</p>
                 <p className='recipes'>{item.recipes}</p>

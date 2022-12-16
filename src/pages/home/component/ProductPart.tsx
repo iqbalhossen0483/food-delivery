@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import Product from "../../../sharedComponent/Product";
-import { ProductSchema } from "../../adminPages/addProduct/AddProduct";
+import Product, { ProductSchema } from "../../../sharedComponent/Product";
 import { HomeLoading } from "../Home";
 
 interface Props {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Product from "../../sharedComponent/Product";
-import { ProductSchema } from "../adminPages/addProduct/AddProduct";
+import Product, { ProductSchema } from "../../sharedComponent/Product";
 
 const Shop: () => JSX.Element = () => {
   const [products, setProducts] = useState<ProductSchema[] | null>(null);
