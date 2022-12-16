@@ -6,4 +6,3 @@ Live site link: https://delivery-53abd.web.app/
 * admin can mange aevrything
 * mobile and desktop friendly
 * users have two role.. user, admin
-* To see admin features, email: rakib@gmail.com pass: Rakib420
