@@ -249,6 +249,9 @@
   th {
     @apply px-4 py-2 text-center;
   }
+  .google-btn {
+    @apply mx-auto text-primary normal-case text-base border-none space-x-1 bg-slate-50 py-1;
+  }
 }
 
 @layer utilities {

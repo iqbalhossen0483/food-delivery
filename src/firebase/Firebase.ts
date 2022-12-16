@@ -34,13 +34,13 @@ const Firebase: () => FirebaseShema = () => {
   }
 
   //addUser name
-  function addUserName(name: string) {
-    if (auth.currentUser) {
-      updateProfile(auth.currentUser, {
+  async function addUserName(user: User, name: string) {
+    try {
+      await updateProfile(user, {
         displayName: name,
-      }).catch((err) => {
-        console.log(err);
       });
+    } catch (error: any) {
+      Error(error.message);
     }
   }
 
@@ -62,54 +62,57 @@ const Firebase: () => FirebaseShema = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        getUserFromDb(user.email);
+        getUserFromDb(user.email!);
       } else setUser(null);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //make user to database
-  function makeUser(user: User) {
-    if (!user.email) return;
-    const { email, displayName, photoURL } = user;
-    let data = {};
-    if (photoURL) {
-      data = { email, displayName, photoURL, role: "user" };
-    } else {
-      data = { email, displayName, role: "user" };
-    }
-
-    fetch(
-      `https://myserver-production-ddf8.up.railway.app/food/users/${user.email}`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(data),
+  async function makeUser(user: User) {
+    try {
+      const { email, displayName, photoURL } = user;
+      let data = {};
+      if (photoURL) {
+        data = { email, displayName, photoURL, role: "user" };
+      } else {
+        data = { email, displayName, role: "user" };
       }
-    )
-      .then(async (res) => {
-        const data = await res.json();
-        if (res.ok) {
-          getUserFromDb(user.email);
-        } else Error(data.message);
-      })
-      .catch((err) => {});
+
+      const res = await fetch(
+        `https://myserver-production-ddf8.up.railway.app/food/users/${user.email}`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      const result = await res.json();
+      if (res.ok) {
+        getUserFromDb(user.email!);
+      } else Error(result.message);
+    } catch (error: any) {
+      Error(error.message);
+    }
   }
 
   //getUser from db
-  function getUserFromDb(Email: string | null) {
-    const email: string = Email || "";
-    fetch(`https://myserver-production-ddf8.up.railway.app/food/users/${email}`)
-      .then(async (res) => {
-        const data = await res.json();
-        if (res.ok) {
-          setUser(data);
-        } else Error(data.message);
-      })
-      .catch(() => setUser(null))
-      .finally(() => setLoading(false));
+  async function getUserFromDb(email: string) {
+    try {
+      const res = await fetch(
+        `https://myserver-production-ddf8.up.railway.app/food/users/${email}`
+      );
+      const data = await res.json();
+      if (res.ok) {
+        setUser(data);
+      } else Error(data.message);
+    } catch (error) {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return {

@@ -12,7 +12,7 @@ export interface FirebaseShema {
   logOUt: () => void;
   user: DbUser | null;
   loading: boolean;
-  addUserName: (name: string) => void;
-  getUserFromDb: (email: string | null) => void;
+  addUserName(user: User, name: string): Promise<void>;
+  getUserFromDb(email: string): Promise<void>;
   makeUser(user: User): void;
 }

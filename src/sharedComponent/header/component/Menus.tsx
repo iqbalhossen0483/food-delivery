@@ -47,7 +47,7 @@ const Menus: FC<Props> = ({ setShowCart }) => {
           <i
             title='Log Out'
             onClick={auth.logOUt}
-            className='fa fa-sign-out'
+            className='fa fa-sign-out cursor-pointer'
             aria-hidden='true'
           />
         )}
