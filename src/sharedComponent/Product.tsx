@@ -12,34 +12,27 @@ const Product: React.FC<Props> = ({ products }) => {
   const auth = useAuth();
 
   function cartProduct(id: string) {
-    if (auth?.userFromDb?.cart) {
-      const exist = auth.userFromDb.cart.find((item) => item === id);
+    if (!auth?.user) return navigate("/login");
+    if (auth?.user?.cart?.length) {
+      const exist = auth.user.cart.find((item) => item === id);
       if (exist) {
-        console.log(exist);
         return alert("Product already added");
       }
     }
-    if (auth?.user) {
-      fetch(
-        `https://myserver-production-ddf8.up.railway.app/food/users/${auth.user.email}`,
-        {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ id }),
+    const url = `https://myserver-production-ddf8.up.railway.app/food/users/${auth.user.email}`;
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          alert("Product added");
         }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.modifiedCount > 0) {
-            alert("Product added");
-            if (auth.user?.email) {
-              auth.getUserFromDb(auth.user?.email);
-            }
-          }
-        });
-    } else navigate("/login");
+      });
   }
 
   return (

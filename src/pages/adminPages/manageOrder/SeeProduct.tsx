@@ -14,10 +14,14 @@ const SeeProduct: React.FC<Props> = ({ id, setShow }) => {
       fetch(
         `https://myserver-production-ddf8.up.railway.app/food/products/${id}`
       )
-        .then((res) => res.json())
-        .then((data) => setProduct(data));
+        .then(async (res) => {
+          const data = await res.json();
+          if (res.ok) setProduct(data);
+          else Error(data.message);
+        })
+        .catch((err) => console.log(err));
     }
-  }, []);
+  }, [id]);
 
   return (
     <div onClick={() => setShow(false)} className='product-in-manage-order'>
@@ -35,7 +39,7 @@ const SeeProduct: React.FC<Props> = ({ id, setShow }) => {
           </div>
         </div>
       ) : (
-        <p>No Product found</p>
+        <p className='text-white'>No Product found</p>
       )}
     </div>
   );

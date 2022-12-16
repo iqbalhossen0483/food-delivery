@@ -27,7 +27,7 @@ const CategoryPart: FC<Props> = ({ setLoading, loding }) => {
         <span className='text-primary'> 20,000 DISHES </span>
         TO ORDER!
       </h2>
-      <p className='font-semibold text-sm md:text-base text-gray my-4'>
+      <p className='font-semibold text-sm lg:text-base text-gray my-4'>
         Welcome to The Biggest Network of Food Ordering & Delivery
       </p>
       <div className='category'>
@@ -46,8 +46,8 @@ const CategoryPart: FC<Props> = ({ setLoading, loding }) => {
             );
           })}
       </div>
-      <div className='md:flex justify-center items-center mt-16'>
-        <p className='mr-5 text-gray font-semibold'>
+      <div className='flex flex-col md:flex-row justify-center items-center mt-5 lg:mt-16'>
+        <p className='mr-5 text-gray font-semibold text-sm lg:text-base'>
           and much more your favorite food
         </p>
         <button className='md:py-1 md:mx-3 mt-3 md:mt-0'>

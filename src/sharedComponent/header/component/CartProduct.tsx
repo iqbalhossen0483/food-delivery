@@ -10,7 +10,7 @@ const CartProduct: FC<Props> = ({ setShowCart }) => {
   const [products, setProducts] = useState<ProductSchema[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const auth = useAuth();
-  const cart: string | undefined = auth?.userFromDb?.cart.join(" ");
+  const cart: string | undefined = auth?.user?.cart.join(" ");
 
   useEffect(() => {
     setLoading(true);
@@ -43,7 +43,7 @@ const CartProduct: FC<Props> = ({ setShowCart }) => {
             </div>
           );
         })
-      ) : auth?.userFromDb?.cart.length ? (
+      ) : auth?.user?.cart.length ? (
         <p>Loading...</p>
       ) : (
         <p>No Product</p>

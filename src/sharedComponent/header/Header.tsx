@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import Menus from './component/Menus';
-import { Link } from 'react-router-dom';
-import TopContactInfo from './component/TopContactInfo';
+import { useState } from "react";
+import Menus from "./component/Menus";
+import { Link } from "react-router-dom";
+import TopContactInfo from "./component/TopContactInfo";
 import "./Header.css";
-import useAuth from '../../hooks/useAuth';
-import CartProduct from './component/CartProduct';
+import CartProduct from "./component/CartProduct";
 
 const Header: () => JSX.Element = () => {
   const [showCart, setShowCart] = useState<boolean>(false);
@@ -27,15 +26,9 @@ const Header: () => JSX.Element = () => {
     <div>
       <TopContactInfo />
       <div className={`header-container ${stiky && "stikemod"}`}>
-        <i
-          onClick={toggleMenu}
-          className="fas fa-bars text-xl md:hidden"
-        />
-        <Link to="/">
-          <img
-            className='h-12 w-28'
-            src="https://i.ibb.co/5MbByQn/logo-7.png" alt=""
-          />
+        <i onClick={toggleMenu} className='fas fa-bars text-xl md:hidden' />
+        <Link to='/'>
+          <img className='h-12 w-28' src='/logo.png' alt='' />
         </Link>
 
         {/* for desktop view */}
@@ -43,9 +36,7 @@ const Header: () => JSX.Element = () => {
           <Menus setShowCart={setShowCart} />
         </div>
 
-        {showCart &&
-          <CartProduct setShowCart={setShowCart} />
-        }
+        {showCart && <CartProduct setShowCart={setShowCart} />}
 
         {/* mobile view */}
         <div className={`mobile-view ${showMobile ? "block" : "hidden"}`}>
@@ -54,6 +45,6 @@ const Header: () => JSX.Element = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Header
+export default Header;

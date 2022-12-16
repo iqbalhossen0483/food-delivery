@@ -21,46 +21,43 @@ function App() {
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/login" element={<LoginRegister />} />
-        <Route path="/place-order/:id" element={<PlaceOrder />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/shop' element={<Shop />} />
+        <Route path='/login' element={<LoginRegister />} />
+        <Route path='/place-order/:id' element={<PlaceOrder />} />
 
         {/* user pages */}
-        <Route path="/myaccount" element={<PrivateRoute element={<MyAccount />}/>}>
+        <Route
+          path='/myaccount'
+          element={<PrivateRoute element={<MyAccount />} />}
+        >
           <Route
-            path="myorder"
-            element={<PrivateRoute
-              element={<MyOrder />}
-            />}
+            path='myorder'
+            element={<PrivateRoute element={<MyOrder />} />}
           />
         </Route>
 
         {/* admin page */}
-        <Route path="/deshboard" element={<AdminRoute element={<Deshboard />} />}>
+        <Route path='/admin' element={<AdminRoute element={<Deshboard />} />}>
           <Route
-            path="add-category"
-            element={<AdminRoute
-              element={<AddCategory />}
-            />} />
+            path='add-category'
+            element={<AdminRoute element={<AddCategory />} />}
+          />
           <Route
-            path="add-product"
-            element={<AdminRoute
-              element={<AddProduct />}
-            />} />
+            path='add-product'
+            element={<AdminRoute element={<AddProduct />} />}
+          />
           <Route
-            path="manage-product"
-            element={<AdminRoute
-              element={<ManageProduct />}
-            />} />
+            path='manage-product'
+            element={<AdminRoute element={<ManageProduct />} />}
+          />
           <Route
-            path="manage-order"
-            element={<AdminRoute
-              element={<ManageOrder />}
-            />} />
+            path='manage-order'
+            element={<AdminRoute element={<ManageOrder />} />}
+          />
         </Route>
 
-        <Route path="*" element={<NotFound />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
     </div>

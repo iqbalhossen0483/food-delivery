@@ -1,52 +1,75 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
-import { OrderSchema } from "../../placeOrder/PlaceOrder";
+import { ProductSchema } from "../../adminPages/addProduct/AddProduct";
+
+interface Order {
+  _id: string;
+  product: ProductSchema[];
+}
 
 const MyOrder: () => JSX.Element = () => {
-  const [order, setOrder] = useState<OrderSchema[] | null>(null);
-  const [productIds, setProductIds] = useState<string[] | null>(null);
+  const [order, setOrder] = useState<Order[] | null>(null);
   const auth = useAuth();
-
-  const idToken: string = localStorage.getItem("idToken") || "";
 
   useEffect(() => {
     fetch(
-      `https://myserver-production-ddf8.up.railway.app/food/orders/${auth?.user?.email}`,
-      {
-        headers: {
-          authorize: idToken,
-        },
-      }
+      `https://myserver-production-ddf8.up.railway.app/food/orders/${auth?.user?.email}`
     )
       .then((res) => res.json())
       .then((data) => {
         setOrder(data);
       });
-  }, []);
+  }, [auth?.user?.email]);
 
-  useEffect(() => {
-    let ids: string[] = [];
-    order?.forEach((item) => {
-      if (item.productId) ids.push(item.productId);
-    });
-    setProductIds(ids);
-  }, [order]);
-
-  console.log(productIds);
   return (
-    <div className='my-order'>
-      <h2>
-        You have {order?.length || 0} order
-        {order?.length && order.length > 1 ? "s" : ""}
-      </h2>
-      <button
-        disabled={order?.length === 0}
-        className='text-base py-1 px-4 ml-5'
-      >
-        Let's see
-        <span className='icon'>&#8594;</span>
-      </button>
-    </div>
+    <>
+      {order?.length ? (
+        <div className='overflow-auto'>
+          <table>
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {order.map((item) => (
+                <tr key={item._id}>
+                  <td>
+                    <img
+                      className='h-16 mx-auto'
+                      src={item.product[0].imgUrl}
+                      alt=''
+                    />
+                  </td>
+                  <td>{item.product[0].name}</td>
+                  <td>
+                    <button className='mx-auto'>
+                      <i className='fa fa-trash'></i>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className='no-order'>
+          <h2>
+            You have {order?.length || 0} order
+            {order?.length && order.length > 1 ? "s" : ""}
+          </h2>
+          <button
+            disabled={order?.length === 0}
+            className='text-base py-1 px-4 ml-5'
+          >
+            Let's Order Something
+            <span className='icon'>&#8594;</span>
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 

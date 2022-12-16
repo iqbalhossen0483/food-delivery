@@ -44,40 +44,55 @@ const AddProduct: () => JSX.Element = () => {
     <form className='add-product' onSubmit={handleSubmit(onSubmit)}>
       <h2>Add A Product</h2>
 
-      <label htmlFor='name'>Product Name:</label>
-      <input
-        {...register("name", { required: true })}
-        type='text'
-        placeholder='Enter category name'
-      />
+      <div className='input-wrap'>
+        <input
+          {...register("name", { required: true })}
+          type='text'
+          required
+          placeholder='Enter category name'
+        />
+        <label htmlFor='name'>Product Name:</label>
+      </div>
 
-      <label htmlFor='tag'>Tags:</label>
-      <input
-        {...register("tag", { required: true })}
-        type='text'
-        placeholder='Enter tags'
-      />
+      <div className='input-wrap'>
+        <input
+          {...register("tag", { required: true })}
+          type='text'
+          required
+          placeholder='Enter tags. Like a | b | c'
+        />
+        <label htmlFor='tag'>Tags:</label>
+      </div>
 
-      <label htmlFor='recipes'>Recipes:</label>
-      <input
-        {...register("recipes", { required: true })}
-        type='text'
-        placeholder='Enter recipes'
-      />
+      <div className='input-wrap'>
+        <input
+          {...register("recipes", { required: true })}
+          type='text'
+          required
+          placeholder='Enter recipes'
+        />
+        <label htmlFor='recipes'>Recipes:</label>
+      </div>
 
-      <label htmlFor='price'>Price:</label>
-      <input
-        {...register("price", { required: true })}
-        type='number'
-        placeholder='Enter price'
-      />
+      <div className='input-wrap'>
+        <input
+          {...register("price", { required: true })}
+          type='number'
+          required
+          placeholder='Enter price'
+        />
+        <label htmlFor='price'>Price:</label>
+      </div>
 
-      <label htmlFor='img'>Product Image:</label>
-      <input
-        className='border-none'
-        {...register("img", { required: true })}
-        type='file'
-      />
+      <div className='input-wrap'>
+        <input
+          className='border-none px-0'
+          {...register("img", { required: true })}
+          required
+          type='file'
+        />
+        <label htmlFor='img'>Product Image:</label>
+      </div>
 
       <button
         className='w-32 py-1 mx-auto col-span-3 mt-7 bg-primary hover:text-primary'

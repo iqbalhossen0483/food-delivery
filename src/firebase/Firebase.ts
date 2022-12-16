@@ -1,4 +1,4 @@
-import firebaseInit from "../firebase/firebaseInit";
+import firebaseInit from "./firebaseInit";
 import { useEffect, useState } from "react";
 import {
   getAuth,
@@ -10,40 +10,15 @@ import {
   signInWithEmailAndPassword,
   signOut,
   User,
-  getIdToken,
 } from "firebase/auth";
+import { FirebaseShema } from "../../firebase";
+import { DbUser } from "../../common";
 
 firebaseInit();
 
-interface Result {
-  user: User;
-}
-
-export interface Hook {
-  loginWithGoogle: () => Promise<Result>;
-  singUpWithEmail: (
-    email: string,
-    password: string,
-    name: string
-  ) => Promise<Result>;
-  loginWithEmail: (email: string, password: string) => Promise<Result>;
-  logOUt: () => void;
-  user: User | null;
-  loading: boolean;
-  userFromDb: UserFromDb | null;
-  addUserName: (name: string) => void;
-  getUserFromDb: (email: string | null) => void;
-}
-
-interface UserFromDb {
-  role: string;
-  cart: string[];
-}
-
-const useFirebase: () => Hook = () => {
-  const [userFromDb, setUserFromDb] = useState<UserFromDb | null>(null);
+const Firebase: () => FirebaseShema = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<DbUser | null>(null);
   const googleProvider = new GoogleAuthProvider();
   const auth = getAuth();
 
@@ -63,11 +38,9 @@ const useFirebase: () => Hook = () => {
     if (auth.currentUser) {
       updateProfile(auth.currentUser, {
         displayName: name,
-      })
-        .then(() => {})
-        .catch((err) => {
-          console.log(err);
-        });
+      }).catch((err) => {
+        console.log(err);
+      });
     }
   }
 
@@ -82,7 +55,6 @@ const useFirebase: () => Hook = () => {
     signOut(auth)
       .then(() => {
         setUser(null);
-        setUserFromDb(null);
       })
       .catch((err) => console.log(err));
   }
@@ -90,20 +62,15 @@ const useFirebase: () => Hook = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUser(user);
-        getIdToken(user).then((idToken) => {
-          localStorage.setItem("idToken", `Bearer ${idToken}`);
-          makeUser(user);
-        });
+        getUserFromDb(user.email);
       } else setUser(null);
-      setLoading(false);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //make user to database
   function makeUser(user: User) {
     if (!user.email) return;
-
     const { email, displayName, photoURL } = user;
     let data = {};
     if (photoURL) {
@@ -122,33 +89,27 @@ const useFirebase: () => Hook = () => {
         body: JSON.stringify(data),
       }
     )
-      .then((res) => res.json())
-      .then((data) => {
-        getUserFromDb(user.email);
+      .then(async (res) => {
+        const data = await res.json();
+        if (res.ok) {
+          getUserFromDb(user.email);
+        } else Error(data.message);
       })
       .catch((err) => {});
   }
 
   //getUser from db
   function getUserFromDb(Email: string | null) {
-    const idToken: string = localStorage.getItem("idToken") || "";
     const email: string = Email || "";
-    fetch(
-      `https://myserver-production-ddf8.up.railway.app/food/users/${email}`,
-      {
-        headers: {
-          authorize: idToken,
-          email: email,
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          setUserFromDb(data);
-        }
+    fetch(`https://myserver-production-ddf8.up.railway.app/food/users/${email}`)
+      .then(async (res) => {
+        const data = await res.json();
+        if (res.ok) {
+          setUser(data);
+        } else Error(data.message);
       })
-      .catch((err) => console.log(err));
+      .catch(() => setUser(null))
+      .finally(() => setLoading(false));
   }
 
   return {
@@ -158,10 +119,10 @@ const useFirebase: () => Hook = () => {
     user,
     loading,
     logOUt,
-    userFromDb,
     addUserName,
     getUserFromDb,
+    makeUser,
   };
 };
 
-export default useFirebase;
+export default Firebase;

@@ -22,7 +22,7 @@ const ProductPart: FC<Props> = ({ setLoading, loding }) => {
   return (
     <div className='home-product-wrapper'>
       <h2>WHAT'S POPULAR</h2>
-      <p className='font-semibold text-gray mb-10'>
+      <p className='font-semibold text-gray mb-10 text-sm lg:text-base'>
         Client's Most Popular Choise
       </p>
       <Product products={products} />

@@ -44,26 +44,35 @@ const AddCategory: () => JSX.Element = () => {
     <form className='add-category' onSubmit={handleSubmit(onSubmit)}>
       <h2>Add A Category</h2>
 
-      <label htmlFor='name'>Category Name:</label>
-      <input
-        {...register("name", { required: true })}
-        type='text'
-        placeholder='Enter category name'
-      />
+      <div className='input-wrap'>
+        <input
+          {...register("name", { required: true })}
+          type='text'
+          required
+          placeholder='Enter category name'
+        />
+        <label htmlFor='name'>Category Name:</label>
+      </div>
 
-      <label htmlFor='tag'>Tag Line:</label>
-      <input
-        {...register("tag", { required: true })}
-        type='text'
-        placeholder='Enter tag line'
-      />
+      <div className='input-wrap'>
+        <input
+          {...register("tag", { required: true })}
+          type='text'
+          required
+          placeholder='Enter tag line'
+        />
+        <label htmlFor='tag'>Tag Line:</label>
+      </div>
 
-      <label htmlFor='img'>Category Image:</label>
-      <input
-        className='border-none'
-        {...register("img", { required: true })}
-        type='file'
-      />
+      <div className='input-wrap'>
+        <input
+          className='border-none px-0'
+          {...register("img", { required: true })}
+          required
+          type='file'
+        />
+        <label htmlFor='img'>Category Image:</label>
+      </div>
 
       <button
         className='w-32 py-1 mx-auto col-span-3 mt-7 bg-primary hover:text-primary'

@@ -70,7 +70,6 @@ const LoginRegister = () => {
     else setLogIn(true);
   }
 
-  console.log(auth?.loading);
   return (
     <form
       className='login-conainer mx-5 lg:w-2/5 lg:mx-auto'

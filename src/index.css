@@ -2,246 +2,285 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-  body{
-    @apply bg-slate-200
+@layer base {
+  body {
+    @apply bg-slate-200;
   }
 }
 
-@layer components{
-
+@layer components {
   /* common */
-  button{
-    @apply px-7 py-2 text-white bg-primary rounded-3xl uppercase text-xl font-semibold hover:bg-slate-100 hover:text-primary border-2 border-primary
+  button {
+    @apply px-7 py-2 text-white bg-primary rounded-3xl uppercase font-medium
+    hover:bg-slate-100 hover:text-primary border-2 border-primary flex 
+    justify-center items-center;
   }
-  button:disabled{
-    @apply bg-slate-100 cursor-not-allowed
+  button:disabled {
+    @apply bg-slate-100 cursor-not-allowed;
   }
-  input{
-    @apply border px-4 py-1 rounded focus:outline-none text-xl my-2 col-span-2
+  input {
+    @apply border px-4 py-1 rounded focus:outline-none w-full;
   }
-  form{
-    @apply flex flex-col bg-white rounded px-5 py-10
+  form {
+    @apply bg-white rounded px-5 py-10 space-y-3;
   }
-  form h2{
-    @apply text-xl font-semibold text-center col-span-3 mb-5
+  form h2 {
+    @apply text-xl font-semibold text-center col-span-3 mb-5;
   }
-  form label{
-    @apply text-xl
-  }
-  .spinner{
-    @apply h-full flex justify-center items-center text-xl
-  }
-  .fa-sign-out{
-    @apply text-xl ml-3
-  }
-  .product-container{
-    @apply lg:grid grid-cols-4 gap-5
-  }
-  .product{
-    @apply bg-white rounded-2xl pb-7 my-5 md:my-0
-  }
-  .product .tag{
-    @apply w-fit text-gray bg-lightgray py-1 px-2 mx-auto rounded text-xs font-semibold max-h-fit
-  }
-  .product .name{
-    @apply text-xl py-3
-  }
-  .product .price{
-    @apply text-xl font-semibold text-primary
-  }
-  .product .recipes{
-    @apply text-gray
-  }
-  .product .action{
-    @apply flex flex-col justify-center items-center
-  }
-  .product .action button{
-    @apply text-sm my-2
-  }
-  .price{
-    @apply text-primary font-semibold
+  .input-wrap {
+    @apply flex flex-col-reverse;
   }
 
+  .spinner {
+    @apply h-full flex justify-center items-center text-xl;
+  }
+  .fa-sign-out {
+    @apply text-xl ml-3;
+  }
+  .product-container {
+    @apply md:grid md:grid-cols-2 lg:grid-cols-4 gap-5;
+  }
+  .product {
+    @apply bg-white rounded-2xl pb-7 my-5 md:my-0;
+  }
+  .product .tag {
+    @apply w-fit text-gray bg-lightgray py-1 px-2 mx-auto rounded text-xs font-semibold max-h-fit;
+  }
+  .product .name {
+    @apply text-xl py-3;
+  }
+  .product .price {
+    @apply text-xl font-semibold text-primary;
+  }
+  .product .recipes {
+    @apply text-gray;
+  }
+  .product .action {
+    @apply flex flex-col justify-center items-center;
+  }
+  .product .action button {
+    @apply text-sm my-2;
+  }
+  .price {
+    @apply text-primary font-semibold;
+  }
 
   /* header component */
-  .header-container{
-    @apply flex justify-between pl-5 pr-16 md:px-20 z-50 bg-white py-2 items-center w-full relative
+  .header-container {
+    @apply flex justify-between pl-5 pr-16 md:px-5 lg:px-20 z-50 bg-white py-2 items-center w-full relative;
   }
-  .menus{
-    @apply flex flex-col lg:flex-row
+  .menus {
+    @apply flex flex-col md:flex-row;
   }
-  .menus a{
-    @apply md:pr-3 font-semibold text-slate-500 hover:text-black
+  .menus a {
+    @apply md:pr-3 font-semibold text-slate-500 hover:text-black;
   }
-  .menus .cart{
-    @apply text-lg relative
+  .menus .cart {
+    @apply text-lg relative;
   }
-  .menus .cart .count{
-    @apply font-semibold absolute -top-3 -right-3 bg-primary text-white rounded-full h-5 w-5 flex justify-center items-center text-base
+  .menus .cart .count {
+    @apply font-semibold absolute -top-3 -right-3 bg-primary text-white rounded-full h-5 w-5 flex justify-center items-center text-base;
   }
-  .stikemod{
-    @apply fixed top-0 left-0 shadow-md
+  .stikemod {
+    @apply fixed top-0 left-0 shadow-md;
   }
-  .mobile-view{
-    @apply absolute top-full left-0 z-50 bg-white w-2/5
+  .mobile-view {
+    @apply absolute top-full left-0 z-50 bg-white w-2/5;
   }
 
   /* cart-prduct */
-  .cart-prduct{
-    @apply absolute top-full right-32 bg-white z-50 shadow-md rounded-b-md px-3 py-5
+  .cart-prduct {
+    @apply absolute top-full right-32 bg-white z-50 shadow-md rounded-b-md px-3 py-5;
   }
-
 
   /* home page */
   /* banner section */
-  .banner-container{
-    @apply w-full text-white flex flex-col justify-center items-center font-medium bg-gray py-14 h-full
+  .banner-container {
+    @apply w-full text-white flex flex-col justify-center items-center font-medium bg-gray py-14 h-full;
   }
-  .banner-container .heading{
-    @apply text-3xl lg:text-7xl px-4 py-2 rounded shadow-sm
+  .banner-container .heading {
+    @apply text-3xl lg:text-7xl px-4 py-2 rounded shadow-sm;
   }
-  .banner-container .tag{
-    @apply text-xl lg:text-3xl px-4 py-2 rounded shadow-sm mt-3
+  .banner-container .tag {
+    @apply text-xl lg:text-3xl px-4 py-2 rounded shadow-sm mt-3;
   }
-  .banner-container .lower-caption{
-    @apply grid grid-cols-2 lg:grid-cols-4 w-full text-center mt-20 md:text-xl uppercase gap-5 lg:gap-0
+  .banner-container .lower-caption {
+    @apply grid grid-cols-2 lg:grid-cols-4 w-full text-center mt-20 md:text-xl uppercase gap-5 lg:gap-0;
   }
-  .banner-container .lower-caption p{
-    @apply hover:text-primary w-fit px-4 rounded
+  .banner-container .lower-caption p {
+    @apply hover:text-primary w-fit px-4 rounded;
   }
-  .banner-container .lower-caption i{
-    @apply mr-3
+  .banner-container .lower-caption i {
+    @apply mr-3;
   }
 
   /* category-section */
-  .category-section{
-    @apply py-10 text-center mt-16
+  .category-section {
+    @apply py-10 text-center mt-16;
   }
-  .category-section .header{
-    @apply text-4xl md:text-5xl
+  .category-section .header {
+    @apply text-4xl lg:text-5xl;
   }
-  .category-section .category{
-    @apply lg:grid grid-cols-4 gap-5 px-10 lg:px-28 mt-10
+  .category-section .category {
+    @apply md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 px-10 lg:px-28 mt-10;
   }
-  .category-section .category .item{
-    @apply bg-white pb-10 rounded-2xl my-5 lg:my-0
+  .category-section .category .item {
+    @apply bg-white pb-10 rounded-2xl my-5 lg:my-0;
   }
-  .category-section .category .item h2{
-    @apply text-xl uppercase font-semibold my-3
+  .category-section .category .item h2 {
+    @apply text-xl uppercase font-semibold my-3;
   }
 
   /* how-to-order section */
-  .how-to-order-wrapper{
-    @apply bg-white pt-20 text-center
+  .how-to-order-wrapper {
+    @apply bg-white pt-20 text-center;
   }
-  .how-to-order-wrapper h2{
-    @apply text-4xl md:text-5xl
+  .how-to-order-wrapper h2 {
+    @apply text-4xl md:text-5xl;
   }
-  .how-to-order-wrapper .step{
-    @apply grid grid-cols-2 lg:grid-cols-4 gap-5 px-2 lg:px-28
+  .how-to-order-wrapper .step {
+    @apply grid grid-cols-2 lg:grid-cols-4 gap-5 px-2 lg:px-28;
   }
-  .how-to-order-wrapper .step .count{
-    @apply text-xl font-semibold bg-primary h-10 w-10 rounded-full mx-auto flex justify-center items-center my-5 text-white
+  .how-to-order-wrapper .step .count {
+    @apply text-xl font-semibold bg-primary h-10 w-10 rounded-full mx-auto flex justify-center items-center my-5 text-white;
   }
 
   /* home-product section */
-  .home-product-wrapper{
-    @apply text-center py-10 lg:py-20 px-7 lg:px-14
+  .home-product-wrapper {
+    @apply text-center py-10 lg:py-20 px-7 lg:px-14;
   }
-  .home-product-wrapper h2{
-    @apply text-4xl md:text-5xl
+  .home-product-wrapper h2 {
+    @apply text-4xl md:text-5xl;
   }
-
 
   /* deshboard */
-  .deshboard-container, .my-account-container{
-    @apply grid grid-cols-6 gap-5
+  .deshboard-container,
+  .my-account-container {
+    @apply grid grid-cols-6 gap-5;
   }
-  .deshboard-container .menus, .my-account-container .menus{
-    @apply  pl-5 py-10 font-semibold border-r border-gray flex flex-col
+  .deshboard-container .menus,
+  .my-account-container .menus {
+    @apply pl-5 py-10 font-medium border-r border-slate-400 bg-white flex flex-col;
   }
-  .deshboard-container .menus a{
-    @apply my-2 leading-5
+  .deshboard-container .menus a {
+    @apply my-2 leading-5;
   }
-  .deshboard-container .front-page, .my-account-container .front-page{
-    @apply flex justify-center items-center h-full text-3xl font-semibold
+  .deshboard-container .front-page,
+  .my-account-container .front-page {
+    @apply flex justify-center items-center h-full text-xl font-semibold;
   }
 
   /* add category page */
-  .add-category, .add-product, .login-conainer, .place-order{
-    @apply mx-auto my-10 grid grid-cols-3 items-center
+  .add-category,
+  .add-product,
+  .login-conainer,
+  .place-order {
+    @apply mx-auto my-10;
   }
 
   /* manage product */
-  .manage-product, .manage-order{
-    @apply text-center bg-white m-5 p-3 rounded
+  .manage-product,
+  .manage-order {
+    @apply text-center bg-white m-5 p-3 rounded;
   }
-  .manage-product .header{
-    @apply grid grid-cols-6 text-xl font-semibold border-b mb-5 items-center
+  .manage-product .header {
+    @apply grid grid-cols-6 text-xl font-semibold border-b mb-5 items-center;
   }
-  .manage-product .product{
-    @apply grid grid-cols-6 gap-5 border-b border-gray rounded-none mb-5 items-center
+  .manage-product .product {
+    @apply grid grid-cols-6 gap-5 border-b border-gray rounded-none mb-5 items-center;
   }
-  .manage-product .header .plus{
-    @apply h-10 w-10 rounded-full bg-primary flex justify-center items-center cursor-default
+  .manage-product .header .plus {
+    @apply h-10 w-10 rounded-full bg-primary flex justify-center items-center cursor-default;
   }
 
   /* manage order */
-  .manage-order .header, .my-order .header{
-    @apply grid grid-cols-4 border-b mb-5 text-xl font-semibold
+  .manage-order .header,
+  .my-order .header {
+    @apply grid grid-cols-4 border-b mb-5 text-xl font-semibold;
   }
-  .manage-order{
-    @apply relative
+  .manage-order {
+    @apply relative;
   }
-  .manage-order .order{
-    @apply grid grid-cols-4 border-b my-3 border-gray items-baseline justify-center pb-3
+  .manage-order .order {
+    @apply grid grid-cols-4 border-b my-3 border-gray items-baseline justify-center pb-3;
   }
-  .manage-order .order .productId{
-    @apply text-primary text-xl
+  .manage-order .order .productId {
+    @apply text-primary text-xl;
   }
-  .product-in-manage-order{
-    @apply bg-gray z-10 w-full h-full rounded shadow-md absolute top-0 left-0 flex justify-center items-center
+  .product-in-manage-order {
+    @apply bg-gray z-10 w-full h-full rounded shadow-md fixed top-0 left-0 flex justify-center items-center;
   }
-  .product-in-manage-order .product{
-    @apply bg-white w-80 rounded shadow-2xl
+  .product-in-manage-order .product {
+    @apply bg-white w-80 rounded shadow-2xl;
   }
 
   /* my order */
-  .my-order{
-    @apply flex justify-center items-center text-xl h-full font-semibold
+  .no-order {
+    @apply flex justify-center items-center text-xl h-full font-semibold;
   }
-  .my-order button .icon{
-    @apply text-2xl font-semibold ml-3
+  .no-order button .icon {
+    @apply text-xl font-medium ml-3;
   }
 
   /* footer */
-  .footer{
-    @apply flex justify-center bg-white items-center py-10 md:text-xl font-semibold text-gray
+  .footer {
+    @apply flex justify-center bg-white items-center py-10 md:text-xl font-semibold text-gray;
+  }
+
+  table {
+    @apply bg-white w-full rounded my-10;
+  }
+  tr {
+    @apply border-b border-blue-100;
+  }
+  thead tr th {
+    @apply text-sm font-medium;
+  }
+  tbody tr:last-child {
+    @apply border-b-0;
+  }
+  tbody tr:nth-child(odd) {
+    @apply bg-slate-100;
+  }
+  tbody tr:nth-child(even) {
+    @apply hover:bg-slate-100;
+  }
+  td,
+  th {
+    @apply px-4 py-2 text-center;
   }
 }
 
-@layer utilities{
-  *{
-    font-family: 'Roboto', sans-serif;
+@layer utilities {
+  * {
+    font-family: "Roboto", sans-serif;
   }
-  button, .stikemod{
-    transition: 0.3s linear;
+  button,
+  .stikemod {
+    transition: all 0.3s linear;
   }
-  .add-category, .add-product{
+  .add-category,
+  .add-product {
     width: 55%;
   }
-  .banner-container .heading{
-    font-family: 'Righteous', cursive;
+  .banner-container .heading {
+    font-family: "Righteous", cursive;
   }
-  .price::after{
+  .price::after {
     content: "৳";
     margin-left: 4px;
   }
-  .deshboard-container, .my-account-container, .spinner{
+  .deshboard-container,
+  .my-account-container,
+  .spinner {
     min-height: 62vh;
   }
-  .mobile-view{
-    min-height: 87vh
+  .mobile-view {
+    min-height: 87vh;
   }
+}
+input:required + label::after {
+  content: "*";
+  color: #ffba00;
+  margin-left: 2px;
 }

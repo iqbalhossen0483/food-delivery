@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
-import { AuthContex } from '../contextAPI/FirebaseProvider'
-import { Hook } from '../firebase/useFirebase';
+import { useContext } from "react";
+import { FirebaseShema } from "../../firebase";
+import { AuthContex } from "../contextAPI/FirebaseProvider";
 
-const useAuth: () => Hook | null = () => {
-    return useContext(AuthContex);
-}
+const useAuth: () => FirebaseShema | null = () => {
+  return useContext(AuthContex);
+};
 
-export default useAuth
+export default useAuth;
