@@ -20,13 +20,10 @@ const AddCategory: () => JSX.Element = () => {
     formData.append("tag", data.tag);
     formData.append("img", data.img[0]);
 
-    fetch(
-      "https://myserver-production-ddf8.up.railway.app/food/products/category",
-      {
-        method: "POST",
-        body: formData,
-      }
-    )
+    fetch("https://server.switchcafebd.com/food/products/category", {
+      method: "POST",
+      body: formData,
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {

@@ -27,9 +27,7 @@ const PlaceOrder: () => JSX.Element = () => {
 
   useEffect(() => {
     if (id) {
-      fetch(
-        `https://myserver-production-ddf8.up.railway.app/food/products/${id}`
-      )
+      fetch(`https://server.switchcafebd.com/food/products/${id}`)
         .then((res) => res.json())
         .then((data) => setProduct(data));
     }
@@ -40,7 +38,7 @@ const PlaceOrder: () => JSX.Element = () => {
     data.name = name;
     data.email = email;
     data.productId = product?._id;
-    fetch("https://myserver-production-ddf8.up.railway.app/food/orders", {
+    fetch("https://server.switchcafebd.com/food/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",

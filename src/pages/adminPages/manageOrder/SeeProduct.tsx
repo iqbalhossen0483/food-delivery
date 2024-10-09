@@ -11,9 +11,7 @@ const SeeProduct: React.FC<Props> = ({ id, setShow }) => {
 
   useEffect(() => {
     if (id) {
-      fetch(
-        `https://myserver-production-ddf8.up.railway.app/food/products/${id}`
-      )
+      fetch(`https://server.switchcafebd.com/food/products/${id}`)
         .then(async (res) => {
           const data = await res.json();
           if (res.ok) setProduct(data);

@@ -22,7 +22,7 @@ const AddProduct: () => JSX.Element = () => {
     formData.append("price", data.price);
     formData.append("img", data.img[0]);
 
-    fetch("https://myserver-production-ddf8.up.railway.app/food/products", {
+    fetch("https://server.switchcafebd.com/food/products", {
       method: "POST",
       body: formData,
     })

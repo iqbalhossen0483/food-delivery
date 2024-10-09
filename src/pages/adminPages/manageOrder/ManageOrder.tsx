@@ -8,7 +8,7 @@ const ManageOrder = () => {
   const [id, setId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    fetch("https://myserver-production-ddf8.up.railway.app/food/orders")
+    fetch("https://server.switchcafebd.com/food/orders")
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, []);

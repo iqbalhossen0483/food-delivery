@@ -15,14 +15,11 @@ const CartProduct: FC<Props> = ({ setShowCart }) => {
   useEffect(() => {
     setLoading(true);
     if (cart) {
-      fetch(
-        `https://myserver-production-ddf8.up.railway.app/food/products/cart`,
-        {
-          headers: {
-            carts: cart,
-          },
-        }
-      )
+      fetch(`https://server.switchcafebd.com/food/products/cart`, {
+        headers: {
+          carts: cart,
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           setProducts(data);

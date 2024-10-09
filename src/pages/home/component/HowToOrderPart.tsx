@@ -15,7 +15,7 @@ const HowToOrderPart: FC<Props> = ({ setLoading, loding }) => {
   const [orderProcess, setOrderProcess] = useState<OrderProcess[] | null>(null);
 
   useEffect(() => {
-    fetch("https://myserver-production-ddf8.up.railway.app/food/orderProcess")
+    fetch("https://server.switchcafebd.com/food/orderProcess")
       .then((res) => res.json())
       .then((data) => {
         setOrderProcess(data);

@@ -11,9 +11,7 @@ const CategoryPart: FC<Props> = ({ setLoading, loding }) => {
   const [categories, setCategories] = useState<categorySchema[] | null>(null);
 
   useEffect(() => {
-    fetch(
-      "https://myserver-production-ddf8.up.railway.app/food/products/category"
-    )
+    fetch("https://server.switchcafebd.com/food/products/category")
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);

@@ -80,7 +80,7 @@ const Firebase: () => FirebaseShema = () => {
       }
 
       const res = await fetch(
-        `https://myserver-production-ddf8.up.railway.app/food/users/${user.email}`,
+        `https://server.switchcafebd.com/food/users/${user.email}`,
         {
           method: "POST",
           headers: {
@@ -102,7 +102,7 @@ const Firebase: () => FirebaseShema = () => {
   async function getUserFromDb(email: string) {
     try {
       const res = await fetch(
-        `https://myserver-production-ddf8.up.railway.app/food/users/${email}`
+        `https://server.switchcafebd.com/food/users/${email}`
       );
       const data = await res.json();
       if (res.ok) {

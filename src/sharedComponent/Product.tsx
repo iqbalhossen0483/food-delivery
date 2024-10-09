@@ -27,7 +27,7 @@ const Product: React.FC<Props> = ({ products }) => {
         return alert("Product already added");
       }
     }
-    const url = `https://myserver-production-ddf8.up.railway.app/food/users/${auth.user.email}`;
+    const url = `https://server.switchcafebd.com/food/users/${auth.user.email}`;
     fetch(url, {
       method: "PUT",
       headers: {

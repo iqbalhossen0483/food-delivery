@@ -12,9 +12,7 @@ const MyOrder: () => JSX.Element = () => {
   const auth = useAuth();
 
   useEffect(() => {
-    fetch(
-      `https://myserver-production-ddf8.up.railway.app/food/orders/${auth?.user?.email}`
-    )
+    fetch(`https://server.switchcafebd.com/food/orders/${auth?.user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setOrder(data);

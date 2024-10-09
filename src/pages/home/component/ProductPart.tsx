@@ -11,7 +11,7 @@ const ProductPart: FC<Props> = ({ setLoading, loding }) => {
   const [products, setProducts] = useState<ProductSchema[] | null>(null);
 
   useEffect(() => {
-    fetch("https://myserver-production-ddf8.up.railway.app/food/products")
+    fetch("https://server.switchcafebd.com/food/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
